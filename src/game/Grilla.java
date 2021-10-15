@@ -27,6 +27,34 @@ public class Grilla {
 	 * @param p una pieza
 	 */
 	public void cambiarPieza(Pieza p) {
-		miJuego.cambiarPieza(p.getPiezaGrafica(), p.getFila(), p.getColumna());
+		miJuego.cambiarPieza(p);
+	}
+
+	/**
+	 * Mueve todas las piezas hacia abajo, resolviendo las coliciones.
+	 */
+	public void moverTodasAbajo() {
+		
+	}
+
+	/**
+	 * Mueve todas las piezas hacia arriba, resolviendo las coliciones.
+	 */
+	public void moverTodasArriba() {
+		
+	}
+
+	/**
+	 * Mueve todas las piezas hacia la izquierda, resolviendo las coliciones.
+	 */
+	public void moverTodasIzquierda() {
+		
+	}
+
+	/**
+	 * Mueve todas las piezas hacia la derecha, resolviendo las coliciones.
+	 */
+	public void moverTodasDerecha() {
+		
 	}
 }
