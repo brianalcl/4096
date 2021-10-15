@@ -14,9 +14,9 @@ public class Pieza {
 	
 	/**
 	 * Crea una nueva pieza con coordanadas y con una grilla.
-	 * @param fila la fila a la que pertenece
-	 * @param columna la columna a la que pertenece
-	 * @param grilla la grilla a la que pertenece
+	 * @param fila la fila a la que pertenece.
+	 * @param columna la columna a la que pertenece.
+	 * @param grilla la grilla a la que pertenece.
 	 */
 	public Pieza(int fila, int columna, Grilla grilla) {
 		this.estaLibre = true;
@@ -29,8 +29,8 @@ public class Pieza {
 	}
 	
 	/**
-	 * retorna la pieza grafica asociada a esta pieza
-	 * @return la pieza grafica asociada a esta pieza
+	 * retorna la pieza grafica asociada a esta pieza.
+	 * @return la pieza grafica asociada a esta pieza.
 	 */
 	public PiezaGrafica getPiezaGrafica() {
 		return miRepresentacion;
@@ -67,12 +67,26 @@ public class Pieza {
 	}
 	
 	/**
-	 * Controla si la pieza esta libre
+	 * Controla si la pieza esta libre.
 	 * @return true si esta libre, false si no lo esta.
 	 */
 	public boolean estaLibre() {
 		return estaLibre;
 	}
 	
+	/**
+	 * Retorna la fila a la que pertenece la pieza.
+	 * @return coordenada de la fila.
+	 */
+	public int getFila() {
+		return fila;
+	}
 	
+	/**
+	 * Retorna la columna a la que pertenece la pieza.
+	 * @return coordenada de la columna.
+	 */
+	public int getColumna() {
+		return columna;
+	}
 }
