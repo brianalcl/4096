@@ -40,8 +40,8 @@ public class Pieza {
 	 * Carga la pieza con un valor el cual generalmente es 2 y raramente 4.
 	 */
 	public void cargar() {
-		int num = rnd.nextInt(10);
-		numero = num == 9? 4 : 2;
+		int num = rnd.nextInt(5);
+		numero = num == 0? 4 : 2;
 		estaLibre = false;
 		miRepresentacion.setImagen(numero);
 		miGrilla.cambiarPieza(this);
@@ -62,6 +62,13 @@ public class Pieza {
 	public void vaciar() {
 		numero = 0;
 		estaLibre = true;
+		miRepresentacion.setImagen(numero);
+		miGrilla.cambiarPieza(this);
+	}
+	
+	public void llenar(int n) {
+		numero = n;
+		estaLibre = false;
 		miRepresentacion.setImagen(numero);
 		miGrilla.cambiarPieza(this);
 	}
@@ -88,5 +95,9 @@ public class Pieza {
 	 */
 	public int getColumna() {
 		return columna;
+	}
+	
+	public int getNumero() {
+		return numero;
 	}
 }
