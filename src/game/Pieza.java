@@ -42,32 +42,30 @@ public class Pieza {
 	public void cargar() {
 		int num = rnd.nextInt(5);
 		numero = num == 0? 4 : 2;
+		numero = 2; //sacar esto TODO
 		estaLibre = false;
 		miRepresentacion.setImagen(numero);
 		miGrilla.cambiarPieza(this);
 	}
 	
 	/**
-	 * Incrementa al doble el numero de la pieza.
+	 * Vacia la pieza y retorna el numero asociado.
 	 */
-	public void incrementar() {
-		numero = numero*2;
-		miRepresentacion.setImagen(numero);
-		miGrilla.cambiarPieza(this);
-	}
-	
-	/**
-	 * Vacia la pieza.
-	 */
-	public void vaciar() {
+	public int vaciar() {
+		int rta = numero;
 		numero = 0;
 		estaLibre = true;
 		miRepresentacion.setImagen(numero);
 		miGrilla.cambiarPieza(this);
+		return rta;
 	}
 	
+	/**
+	 * llena la pieza en cuestion, si la pieza esta vacia entonces se llena, de lo contrario se duplica su valor.
+	 * @param n el numero a cargar en la pieza.
+	 */
 	public void llenar(int n) {
-		numero = n;
+		numero = numero == 0 ? n : numero * 2;
 		estaLibre = false;
 		miRepresentacion.setImagen(numero);
 		miGrilla.cambiarPieza(this);
@@ -97,7 +95,14 @@ public class Pieza {
 		return columna;
 	}
 	
-	public int getNumero() {
-		return numero;
+	/**
+	 * Retorna verdadero si las piezas son iguales (contienen el mismo numero)
+	 * y falso en caso contrario.
+	 * @param p una pieza.
+	 * @return true si tienen el mismo numero false caso contrario.
+	 */
+	public boolean esIgual(Pieza p) {
+		return numero == p.numero;
 	}
+
 }

@@ -3,6 +3,7 @@ package game;
 import java.util.Iterator;
 import java.util.Random;
 
+
 public class Grilla {
 	private Juego miJuego;
 	private Pieza[][] matriz;
@@ -42,9 +43,7 @@ public class Grilla {
 	 * Mueve todas las piezas hacia abajo, resolviendo las coliciones.
 	 */
 	public void moverTodasAbajo() { // experimental TODO
-		bajar();
-		apilarBajando();
-		bajar();
+		bajarYApilar();
 		crearPieza();
 	}
 
@@ -52,118 +51,105 @@ public class Grilla {
 	 * Mueve todas las piezas hacia arriba, resolviendo las coliciones.
 	 */
 	public void moverTodasArriba() { // experimental TODO
-		subir();
-		apilarSubiendo();
-		subir();
+		subirYApilar();
 		crearPieza();
 	}
 	
-	private void apilarSubiendo() {
-		Pieza anterior;
-		Pieza siguiente;
-		
-		int f=0;
-		int c=0;
-		for (c = 0; c < matriz.length; c++) {
-			anterior = matriz[0][c];
-			for (f = 1; f < matriz.length; f++) {
-				siguiente = matriz[f][c];
-				if(anterior.getNumero() == siguiente.getNumero()) {
-					anterior.incrementar();
-					siguiente.vaciar();
-					anterior = siguiente;
-				}
-				else {
-					anterior = siguiente;
-				}
-			}
-		}
-	}
-	
-	private void subir() {
-		Pieza anterior;
-		Pieza siguiente;
-		
-		int f=0;
-		int c=0;
-		
-		for (c = 0; c < matriz.length; c++) {
-			anterior = matriz[0][c];
-			for (f = 1; f < matriz.length; f++) {
-				siguiente = matriz[f][c];
-				if(anterior.estaLibre()) {
-					if(!siguiente.estaLibre()) {
-						anterior.llenar(siguiente.getNumero());
-						siguiente.vaciar();
-						anterior = siguiente;
-					}
-				}
-				else {
-					anterior = siguiente;
-				}
-			}
-		}
-	}
-	
-	private void apilarBajando() {
-		Pieza anterior;
-		Pieza siguiente;
-		
-		int f=0;
-		int c=0;
-		for (c = 0; c < matriz.length; c++) {
-			anterior = matriz[matriz.length-1][c];
-			for (f = matriz.length - 2; f >= 0; f--) {
-				siguiente = matriz[f][c];
-				if(anterior.getNumero() == siguiente.getNumero()) {
-					anterior.incrementar();
-					siguiente.vaciar();
-					anterior = siguiente;
-				}
-				else {
-					anterior = siguiente;
-				}
-			}
-		}
-	}
-	
-	private void bajar() {
-		Pieza anterior;
-		Pieza siguiente;
-		
-		int f=0;
-		int c=0;
-		
-		for (c = 0; c < matriz.length; c++) {
-			anterior = matriz[matriz.length-1][c];
-			for (f = matriz.length - 2; f >= 0; f--) {
-				siguiente = matriz[f][c];
-				if(anterior.estaLibre()) {
-					if(!siguiente.estaLibre()) {
-						anterior.llenar(siguiente.getNumero());
-						siguiente.vaciar();
-						anterior = siguiente;
-					}
-				}
-				else {
-					anterior = siguiente;
-				}
-			}
-		}
-	}
-
 	/**
 	 * Mueve todas las piezas hacia la izquierda, resolviendo las coliciones.
 	 */
 	public void moverTodasIzquierda() {
-		
+		izquierdaYApilar();
+		crearPieza();
 	}
 
 	/**
 	 * Mueve todas las piezas hacia la derecha, resolviendo las coliciones.
 	 */
 	public void moverTodasDerecha() {
+		derechaYApilar();
+		crearPieza();
+	}
+	
+	private void izquierdaYApilar() {
+		Pieza fijo;
+		Pieza sig;
 		
+		for (int f = 0; f < matriz.length; f++) {
+			fijo = matriz[f][0];
+			for (int c = 1; c < matriz.length; c++) {
+				sig = matriz[f][c];
+				fijo = apilar(fijo, sig, 0, 1);			
+			}
+		}
+	}
+	
+	private void subirYApilar() {
+		Pieza fijo;
+		Pieza sig;
+		
+		for (int c = 0; c < matriz.length; c++) {
+			fijo = matriz[0][c];
+			for (int f = 1; f < matriz.length; f++) {
+				sig = matriz[f][c];
+				fijo = apilar(fijo, sig, 1, 0);			
+			}
+		}
+	}
+	
+	private void derechaYApilar() {
+		Pieza fijo;
+		Pieza sig;
+		
+		for (int f = 0; f < matriz.length; f++) {
+			fijo = matriz[f][matriz.length-1];
+			for (int c = matriz.length-2; c >= 0; c--) {
+				sig = matriz[f][c];
+				fijo = apilar(fijo, sig, 0, -1);			
+			}
+		}
+	}
+	
+	private void bajarYApilar() {
+		Pieza fijo;
+		Pieza sig;
+		
+		for (int c = 0; c < matriz.length; c++) {
+			fijo = matriz[matriz.length-1][c];
+			for (int f = matriz.length-2; f >= 0; f--) {
+				sig = matriz[f][c];
+				fijo = apilar(fijo, sig, -1, 0);			
+			}
+		}
+	}
+	
+	/**
+	 * Si es posible apilar, apila, luego retorna la pieza fijo.
+	 * @param fijo 
+	 * @param sig
+	 * @param fFila incremento en la fila de fijo
+	 * @param fColumna incremento en la columna de fijo
+	 * @return la pieza fijo
+	 */
+	private Pieza apilar(Pieza fijo, Pieza sig, int fFila, int fColumna) {
+		if(fijo.estaLibre() && !sig.estaLibre()) {
+			fijo.llenar(sig.vaciar());
+		}
+		else {
+			if(!sig.estaLibre()) {
+				if(fijo.esIgual(sig)) {
+					fijo.llenar(sig.vaciar());
+					fijo = matriz[fijo.getFila() + fFila][fijo.getColumna() + fColumna];
+				}
+				else {
+					fijo = matriz[fijo.getFila() + fFila][fijo.getColumna() + fColumna];
+					if(!fijo.equals(sig)) {
+						fijo.llenar(sig.vaciar());
+					}
+				}
+			}
+		}
+		return fijo;
 	}
 	
 	/**
@@ -175,6 +161,21 @@ public class Grilla {
 		boolean corte = false;
 		int cant = 0; //basura agregada para que corte el juego xD TODO
 		
+//		matriz[0][0].cargar();
+//		matriz[1][0].cargar();
+//		matriz[2][0].cargar();
+//		matriz[3][0].cargar();
+//		
+//		matriz[0][1].cargar();
+//		matriz[2][1].cargar();
+//		
+//		matriz[1][2].cargar();
+//		matriz[3][2].cargar();
+//		
+//		matriz[0][3].llenar(2);
+//		matriz[1][3].llenar(4);
+//		matriz[2][3].llenar(8);
+//		matriz[3][3].llenar(16);
 		
 		while(!corte && cant < 1000) {
 			cant++;

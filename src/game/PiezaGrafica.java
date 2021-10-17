@@ -21,9 +21,9 @@ public class PiezaGrafica extends JLabel{
 	 * @param el numero de la imagen
 	 */
 	public void setImagen(int numero){
-		String ruta = ""+numero;
-		//if(numero != 0)
-			setText(ruta);
+		String ruta = numero == 0? "" : ""+numero;
+		setText(ruta);
+		
 		switch(numero) {
 		case 0:
 			setForeground(Color.BLACK);
