@@ -21,6 +21,9 @@ public class Datos {
 		cargarConfiguracion();
 	}
 	
+	/**
+	 * Carga el archivo de configuracion.
+	 */
 	public void cargarConfiguracion() {
 		try (InputStream input = new FileInputStream("./src/resources/configuration.properties")) {
 
@@ -33,7 +36,10 @@ public class Datos {
 
     }
 	
-	public void salirDelJuego() {
+	/**
+	 * Permite guardar la informacion del record mas alto del juego.
+	 */
+	public void guardarInformacion() {
 		try {
 			FileOutputStream fileOutputStream = new FileOutputStream(configuration.getProperty("file"));
 			ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
@@ -47,7 +53,10 @@ public class Datos {
 		}
 	}
 	
-	public void entrarAlJuego() {
+	/**
+	 * Permite cargar la informacion del record mas alto en el juego.
+	 */
+	public void cargarInformacion() {
 		try {
 			FileInputStream fileInputStream = new FileInputStream(configuration.getProperty("file"));
 			ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);

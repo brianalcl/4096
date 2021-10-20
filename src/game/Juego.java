@@ -26,7 +26,7 @@ public class Juego {
 		this.grillaPrincipal = new Grilla(this);
 		
 		this.datos = new Datos(this);
-		this.datos.entrarAlJuego();
+		this.datos.cargarInformacion();
 	}
 	
 	/**
@@ -68,13 +68,21 @@ public class Juego {
 	 */
 	public void incrementarPuntaje(int rta) {
 		puntaje += rta;
-		miVentana.incrementarPuntaje(puntaje);
+		miVentana.actualizarPuntaje(puntaje);
 	}
 	
+	/**
+	 * Retorna el jugador.
+	 * @return el jugador.
+	 */
 	public Player getJugador() {
 		return miJugador;
 	}
 	
+	/**
+	 * Setea el jugador.
+	 * @param jugador
+	 */
 	public void setJugador(Player jugador) {
 		this.miJugador = jugador;
 	}
@@ -85,11 +93,15 @@ public class Juego {
 	public void salirDelJuego() {
 		if(miJugador.getBestScore() < puntaje)
 			miJugador.setBestScore(puntaje);
-		datos.salirDelJuego();
+		datos.guardarInformacion();
 	}
-
+	
+	/**
+	 * Setea el record mas alto.
+	 * @param bestScore el record mas alto.
+	 */
 	public void addBestScore(int bestScore) {
 		this.bestScore = bestScore;
-		miVentana.actualizarBestScore(bestScore);
+		miVentana.actualizarBestScore(this.bestScore);
 	}
 }

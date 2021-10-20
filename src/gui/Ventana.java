@@ -4,29 +4,25 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 import game.Juego;
-import game.Pieza;
-import main.Player;
 
 import javax.swing.JPanel;
-import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.GraphicsEnvironment;
 import java.awt.GridLayout;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
 
 public class Ventana extends JFrame{
+	/**
+	 * Serial por defecto.
+	 */
+	private static final long serialVersionUID = 1L;
+	private static final String FUENTE = "SansSerif";
+	
 	private Juego miJuego;
 	private JLabel[][] matrizPrincipal;
 	private JPanel panel;
@@ -47,6 +43,7 @@ public class Ventana extends JFrame{
 		this.matrizPrincipal = new JLabel[4][4];
 		crearFrame();
 		crearPanelDeJuego();
+		crearPanelStats();
 		agregarControles();
 	}
 	
@@ -72,33 +69,6 @@ public class Ventana extends JFrame{
 		panel.setBorder(new LineBorder(new Color(100, 0, 0), 10));
 		getContentPane().add(panel);
 		
-		panelEstadisticas = new JPanel();
-		panelEstadisticas.setBounds(0, 0, 400, 100);
-		panelEstadisticas.setBackground(new Color(185, 173, 160));
-		getContentPane().add(panelEstadisticas);
-		panelEstadisticas.setLayout(null);
-		
-		lblScore = new JLabel("SCORE:");
-		lblScore.setFont(new Font("SansSerif", Font.BOLD, 20));
-		lblScore.setBounds(10, 64, 80, 26);
-		panelEstadisticas.add(lblScore);
-		
-		lblScoreDat = new JLabel("");
-		lblScoreDat.setFont(new Font("SansSerif", Font.BOLD, 20));
-		lblScoreDat.setBounds(100, 64, 142, 26);
-		panelEstadisticas.add(lblScoreDat);
-		
-		lblBest = new JLabel("BEST:");
-		lblBest.setFont(new Font("SansSerif", Font.BOLD, 20));
-		lblBest.setBounds(10, 10, 80, 26);
-		panelEstadisticas.add(lblBest);
-		
-		lblBestDat = new JLabel("");
-		lblBestDat.setFont(new Font("SansSerif", Font.BOLD, 20));
-		lblBestDat.setBounds(100, 10, 142, 26);
-		panelEstadisticas.add(lblBestDat);
-		
-		
 		for (int f = 0; f < matrizPrincipal.length; f++) {
 			for(int c = 0; c < matrizPrincipal[0].length; c++) {
 				matrizPrincipal[f][c] = new JLabel();
@@ -107,6 +77,37 @@ public class Ventana extends JFrame{
 			}
 		}
 		
+	}
+	
+	/**
+	 * Crea el panel con las estadisticas del juego.
+	 */
+	private void crearPanelStats() {
+		panelEstadisticas = new JPanel();
+		panelEstadisticas.setBounds(0, 0, 400, 100);
+		panelEstadisticas.setBackground(new Color(185, 173, 160));
+		getContentPane().add(panelEstadisticas);
+		panelEstadisticas.setLayout(null);
+		
+		lblScore = new JLabel("SCORE:");
+		lblScore.setFont(new Font(FUENTE, Font.BOLD, 20));
+		lblScore.setBounds(10, 64, 80, 26);
+		panelEstadisticas.add(lblScore);
+		
+		lblScoreDat = new JLabel("");
+		lblScoreDat.setFont(new Font(FUENTE, Font.BOLD, 20));
+		lblScoreDat.setBounds(100, 64, 142, 26);
+		panelEstadisticas.add(lblScoreDat);
+		
+		lblBest = new JLabel("BEST:");
+		lblBest.setFont(new Font(FUENTE, Font.BOLD, 20));
+		lblBest.setBounds(10, 10, 80, 26);
+		panelEstadisticas.add(lblBest);
+		
+		lblBestDat = new JLabel("");
+		lblBestDat.setFont(new Font(FUENTE, Font.BOLD, 20));
+		lblBestDat.setBounds(100, 10, 142, 26);
+		panelEstadisticas.add(lblBestDat);
 	}
 	
 	/**
@@ -154,15 +155,26 @@ public class Ventana extends JFrame{
 		matrizPrincipal[fila][columna].setBorder(p.getBorder());
 	}
 
-	public void incrementarPuntaje(int rta) {
-		lblScoreDat.setText(""+rta);
+	/**
+	 * Actualiza el puntaje.
+	 * @param p el puntaje.
+	 */
+	public void actualizarPuntaje(int p) {
+		lblScoreDat.setText(""+p);
 	}
 	
+	/**
+	 * Da por terminado el juego.
+	 */
 	private void cerrarJuego() {
 		miJuego.salirDelJuego();
 	}
-
-	public void actualizarBestScore(int bestScore) {
-		lblBestDat.setText(""+bestScore);
+	
+	/**
+	 * Actualiza el puntaje maximo.
+	 * @param best.
+	 */
+	public void actualizarBestScore(int best) {
+		lblBestDat.setText(""+best);
 	}
 }

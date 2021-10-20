@@ -8,6 +8,11 @@ import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 
 public class PiezaGrafica extends JLabel{
+	/**
+	 * Serial por defecto.
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	private static final String FUENTE = "SansSerif";
 	
 	public PiezaGrafica() {
