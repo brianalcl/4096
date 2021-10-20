@@ -64,6 +64,9 @@ public class Grilla {
 			miJuego.termino();
 	}
 	
+	/**
+	 * Mueve para la izquierda todas la piezas y las apila.
+	 */
 	private void izquierdaYApilar() {
 		Pieza fijo;
 		Pieza sig;
@@ -77,6 +80,9 @@ public class Grilla {
 		}
 	}
 	
+	/**
+	 * Mueve para arriba todas la piezas y las apila.
+	 */
 	private void subirYApilar() {
 		Pieza fijo;
 		Pieza sig;
@@ -90,6 +96,9 @@ public class Grilla {
 		}
 	}
 	
+	/**
+	 * Mueve para la derecha todas la piezas y las apila.
+	 */
 	private void derechaYApilar() {
 		Pieza fijo;
 		Pieza sig;
@@ -103,6 +112,9 @@ public class Grilla {
 		}
 	}
 	
+	/**
+	 * Mueve para abajo todas la piezas y las apila.
+	 */
 	private void bajarYApilar() {
 		Pieza fijo;
 		Pieza sig;

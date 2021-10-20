@@ -30,6 +30,9 @@ public class Ventana extends JFrame{
 		agregarControles();
 	}
 	
+	/**
+	 * Setea algunos parametros de la ventana.
+	 */
 	private void crearFrame() {
 		setSize(415, 438);
 		setResizable(false);
@@ -39,11 +42,14 @@ public class Ventana extends JFrame{
 		setVisible(true);
 	}
 	
+	/**
+	 * Crea el panel del juego.
+	 */
 	private void crearPanelDeJuego() {
 		panel = new JPanel();
 		panel.setBounds(0, 0, 400, 400);
 		panel.setLayout(new GridLayout(4, 4, 0, 0));
-		panel.setBorder(new LineBorder(new Color(100, 0, 0), 5, true));
+		panel.setBorder(new LineBorder(new Color(100, 0, 0), 10));
 		getContentPane().add(panel);
 		
 		
@@ -57,6 +63,9 @@ public class Ventana extends JFrame{
 		
 	}
 	
+	/**
+	 * Agrega el sistema de oyentes en la ventana.
+	 */
 	private void agregarControles() {
 
 		this.addKeyListener(new KeyAdapter() {
@@ -84,6 +93,12 @@ public class Ventana extends JFrame{
 		});
 	}
 	
+	/**
+	 * Cambia la parte visual de un label.
+	 * @param p un label con informacion ya cargada.
+	 * @param fila la fila del label a cambiar.
+	 * @param columna la columna del label a cambiar.
+	 */
 	public void cambiarPieza(JLabel p, int fila, int columna) {
 		matrizPrincipal[fila][columna].setText(p.getText());
 		matrizPrincipal[fila][columna].setFont(p.getFont());

@@ -46,6 +46,9 @@ public class Juego {
 		puntaje += p;
 	}
 	
+	/**
+	 * Indica que termino el juego
+	 */
 	public void termino() {
 		termino = true;
 		System.out.println("Fin del juego");
