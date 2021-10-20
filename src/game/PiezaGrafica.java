@@ -13,8 +13,7 @@ public class PiezaGrafica extends JLabel{
 	public PiezaGrafica() {
 		setFont(new Font(FUENTE, Font.BOLD, 25));
 		setHorizontalAlignment(SwingConstants.CENTER);
-		setBorder(new LineBorder(new Color(100, 50, 0), 2));
-		
+		setBorder(new LineBorder(new Color(185, 173, 160), 2));
 	}
 	
 	/**
