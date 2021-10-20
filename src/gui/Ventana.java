@@ -16,11 +16,16 @@ import java.awt.GraphicsEnvironment;
 import java.awt.GridLayout;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.Font;
 
 public class Ventana extends JFrame{
 	private Juego miJuego;
 	private JLabel[][] matrizPrincipal;
 	private JPanel panel;
+	private JPanel panelEstadisticas;
+	private JLabel lblScoreDat;
+	private JLabel lblBest;
+	private JLabel lblBestDat;
 	
 	public Ventana(Juego juego) {
 		this.miJuego = juego;
@@ -34,7 +39,7 @@ public class Ventana extends JFrame{
 	 * Setea algunos parametros de la ventana.
 	 */
 	private void crearFrame() {
-		setSize(415, 438);
+		setSize(415, 538);
 		setResizable(false);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
@@ -47,10 +52,36 @@ public class Ventana extends JFrame{
 	 */
 	private void crearPanelDeJuego() {
 		panel = new JPanel();
-		panel.setBounds(0, 0, 400, 400);
+		panel.setBounds(0, 100, 400, 400);
 		panel.setLayout(new GridLayout(4, 4, 0, 0));
 		panel.setBorder(new LineBorder(new Color(100, 0, 0), 10));
 		getContentPane().add(panel);
+		
+		panelEstadisticas = new JPanel();
+		panelEstadisticas.setBounds(0, 0, 400, 100);
+		panelEstadisticas.setBackground(new Color(185, 173, 160));
+		getContentPane().add(panelEstadisticas);
+		panelEstadisticas.setLayout(null);
+		
+		JLabel lblScore = new JLabel("SCORE:");
+		lblScore.setFont(new Font("SansSerif", Font.BOLD, 20));
+		lblScore.setBounds(10, 64, 80, 26);
+		panelEstadisticas.add(lblScore);
+		
+		lblScoreDat = new JLabel("");
+		lblScoreDat.setFont(new Font("SansSerif", Font.BOLD, 20));
+		lblScoreDat.setBounds(100, 64, 142, 26);
+		panelEstadisticas.add(lblScoreDat);
+		
+		lblBest = new JLabel("BEST:");
+		lblBest.setFont(new Font("SansSerif", Font.BOLD, 20));
+		lblBest.setBounds(10, 10, 80, 26);
+		panelEstadisticas.add(lblBest);
+		
+		lblBestDat = new JLabel("");
+		lblBestDat.setFont(new Font("SansSerif", Font.BOLD, 20));
+		lblBestDat.setBounds(100, 10, 142, 26);
+		panelEstadisticas.add(lblBestDat);
 		
 		
 		for (int f = 0; f < matrizPrincipal.length; f++) {
@@ -106,5 +137,9 @@ public class Ventana extends JFrame{
 		matrizPrincipal[fila][columna].setBackground(p.getBackground());
 		matrizPrincipal[fila][columna].setHorizontalAlignment(p.getHorizontalAlignment());
 		matrizPrincipal[fila][columna].setBorder(p.getBorder());
+	}
+
+	public void incrementarPuntaje(int rta) {
+		lblScoreDat.setText(""+rta);
 	}
 }

@@ -66,7 +66,12 @@ public class Pieza {
 	 * @param n el numero a cargar en la pieza.
 	 */
 	public void llenar(int n) {
-		numero = numero == 0 ? n : numero * 2;
+		if(numero == 0) 
+			numero = n;
+		else {
+			numero *= 2;
+			miGrilla.incrementarPuntaje(numero);
+		}
 		estaLibre = false;
 		miRepresentacion.setImagen(numero);
 		miGrilla.cambiarPieza(this);

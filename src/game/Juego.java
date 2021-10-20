@@ -53,4 +53,13 @@ public class Juego {
 		termino = true;
 		System.out.println("Fin del juego");
 	}
+	
+	/**
+	 * Incrementa el puntaje.
+	 * @param rta
+	 */
+	public void incrementarPuntaje(int rta) {
+		puntaje += rta;
+		miVentana.incrementarPuntaje(puntaje);
+	}
 }

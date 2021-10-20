@@ -65,6 +65,14 @@ public class Grilla {
 	}
 	
 	/**
+	 * Incrementa el puntaje.
+	 * @param rta
+	 */
+	public void incrementarPuntaje(int rta) {
+		miJuego.incrementarPuntaje(rta);
+	}
+	
+	/**
 	 * Mueve para la izquierda todas la piezas y las apila.
 	 */
 	private void izquierdaYApilar() {
