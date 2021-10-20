@@ -22,10 +22,12 @@ public class Pieza {
 		this.estaLibre = true;
 		this.numero = 0;
 		this.miRepresentacion = new PiezaGrafica();
+		this.miRepresentacion.setImagen(numero);
 		this.rnd = new Random();
 		this.miGrilla = grilla;
 		this.fila = fila;
 		this.columna = columna;
+		this.miGrilla.cambiarPieza(this);
 	}
 	
 	/**
@@ -40,9 +42,8 @@ public class Pieza {
 	 * Carga la pieza con un valor el cual generalmente es 2 y raramente 4.
 	 */
 	public void cargar() {
-		int num = rnd.nextInt(5);
+		int num = rnd.nextInt(8);
 		numero = num == 0? 4 : 2;
-		numero = 2; //sacar esto TODO
 		estaLibre = false;
 		miRepresentacion.setImagen(numero);
 		miGrilla.cambiarPieza(this);

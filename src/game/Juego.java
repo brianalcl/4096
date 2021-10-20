@@ -9,13 +9,15 @@ public class Juego {
 	public static final int MOVER_ARRIBA = 8;
 	
 	private int puntaje;
+	private boolean termino;
 	private Ventana miVentana;
 	private Grilla grillaPrincipal;
 	
 	public Juego() {
+		this.termino = false;
 		this.puntaje = 0;
-		miVentana = new Ventana(this);
-		grillaPrincipal = new Grilla(this);
+		this.miVentana = new Ventana(this);
+		this.grillaPrincipal = new Grilla(this);
 		
 	}
 	
@@ -24,20 +26,8 @@ public class Juego {
 	 * @param operacion un entero que reprecenta los movimientos.
 	 */
 	public synchronized void operar(int operacion) {
-		switch(operacion) {
-		case MOVER_ABAJO:
-			grillaPrincipal.moverTodasAbajo();
-			break;
-		case MOVER_ARRIBA:
-			grillaPrincipal.moverTodasArriba();
-			break;
-		case MOVER_DERECHA:
-			grillaPrincipal.moverTodasDerecha();
-			break;
-		case MOVER_IZQUIERDA:
-			grillaPrincipal.moverTodasIzquierda();
-			break;
-		}
+		if(!termino)
+			grillaPrincipal.mover(operacion);
 	}
 	
 	/**
@@ -54,5 +44,10 @@ public class Juego {
 	 */
 	public void addPuntaje(int p) {
 		puntaje += p;
+	}
+	
+	public void termino() {
+		termino = true;
+		System.out.println("Fin del juego");
 	}
 }
