@@ -169,7 +169,7 @@ public class Grilla {
 		int c = 0;
 		boolean corte = false;
 		
-		while(!corte) {
+		while(!corte) { //En esta matriz, la probabilidad de que tarde en encontrar una posicion libre es baja.
 			f = Math.abs(rndFila.nextInt()) % 4;
 			c = Math.abs(rndColumna.nextInt()) % 4;
 			if(matriz[f][c].estaLibre()) {
