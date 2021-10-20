@@ -56,8 +56,9 @@ public class Grilla {
 		case Juego.MOVER_IZQUIERDA: izquierdaYApilar(); break;
 		}
 		
-		if(cantLlenas < (matriz.length * matriz.length)) {
+		if(realizoMovimiento && cantLlenas < (matriz.length * matriz.length)) {
 			crearPieza();
+			realizoMovimiento = false;
 		}
 		if(!verificar())
 			miJuego.termino();
