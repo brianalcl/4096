@@ -1,6 +1,8 @@
 package game;
 
+import data.Datos;
 import gui.Ventana;
+import main.Player;
 
 public class Juego {
 	public static final int MOVER_ABAJO = 2;
@@ -12,13 +14,19 @@ public class Juego {
 	private boolean termino;
 	private Ventana miVentana;
 	private Grilla grillaPrincipal;
+	private Datos datos;
+	private Player miJugador;
+	private int bestScore;
 	
 	public Juego() {
+		this.miJugador = new Player();
 		this.termino = false;
 		this.puntaje = 0;
 		this.miVentana = new Ventana(this);
 		this.grillaPrincipal = new Grilla(this);
 		
+		this.datos = new Datos(this);
+		this.datos.entrarAlJuego();
 	}
 	
 	/**
@@ -61,5 +69,27 @@ public class Juego {
 	public void incrementarPuntaje(int rta) {
 		puntaje += rta;
 		miVentana.incrementarPuntaje(puntaje);
+	}
+	
+	public Player getJugador() {
+		return miJugador;
+	}
+	
+	public void setJugador(Player jugador) {
+		this.miJugador = jugador;
+	}
+	
+	/**
+	 * Guarda el mayor record
+	 */
+	public void salirDelJuego() {
+		if(miJugador.getBestScore() < puntaje)
+			miJugador.setBestScore(puntaje);
+		datos.salirDelJuego();
+	}
+
+	public void addBestScore(int bestScore) {
+		this.bestScore = bestScore;
+		miVentana.actualizarBestScore(bestScore);
 	}
 }

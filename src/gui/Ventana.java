@@ -5,6 +5,8 @@ import javax.swing.JLabel;
 
 import game.Juego;
 import game.Pieza;
+import main.Player;
+
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
@@ -17,6 +19,12 @@ import java.awt.GridLayout;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.Font;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 
 public class Ventana extends JFrame{
 	private Juego miJuego;
@@ -26,8 +34,15 @@ public class Ventana extends JFrame{
 	private JLabel lblScoreDat;
 	private JLabel lblBest;
 	private JLabel lblBestDat;
+	private JLabel lblScore;
 	
 	public Ventana(Juego juego) {
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				cerrarJuego();
+			}
+		});
 		this.miJuego = juego;
 		this.matrizPrincipal = new JLabel[4][4];
 		crearFrame();
@@ -63,7 +78,7 @@ public class Ventana extends JFrame{
 		getContentPane().add(panelEstadisticas);
 		panelEstadisticas.setLayout(null);
 		
-		JLabel lblScore = new JLabel("SCORE:");
+		lblScore = new JLabel("SCORE:");
 		lblScore.setFont(new Font("SansSerif", Font.BOLD, 20));
 		lblScore.setBounds(10, 64, 80, 26);
 		panelEstadisticas.add(lblScore);
@@ -141,5 +156,13 @@ public class Ventana extends JFrame{
 
 	public void incrementarPuntaje(int rta) {
 		lblScoreDat.setText(""+rta);
+	}
+	
+	private void cerrarJuego() {
+		miJuego.salirDelJuego();
+	}
+
+	public void actualizarBestScore(int bestScore) {
+		lblBestDat.setText(""+bestScore);
 	}
 }
