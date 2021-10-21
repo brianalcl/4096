@@ -25,8 +25,10 @@ public class Datos {
 	 * Carga el archivo de configuracion.
 	 */
 	private void cargarConfiguracion() {
-		try (InputStream input = new FileInputStream("./src/resources/configuration.properties")) {
-
+		
+		
+		try {
+			InputStream input = new FileInputStream("./src/resources/configuration.properties");
             configuration = new Properties();
             configuration.load(input);
 
