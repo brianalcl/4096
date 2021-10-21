@@ -20,10 +20,10 @@ public class PanelFinDeJuego extends JPanel{
 
 	private static final String FUENTE = "SansSerif";
 	
-	private JButton btnFinDeJuegoRestart;
-	private JButton btnFinDeJuegoExit;
+	private JButton btnRestart;
+	private JButton btnExit;
 
-	private JLabel lblNewLabel;
+	private JLabel lblGameOver;
 
 	public PanelFinDeJuego(Ventana v) {
 		setBackground(new Color(205, 193, 180));
@@ -31,27 +31,27 @@ public class PanelFinDeJuego extends JPanel{
 		setBounds(0, 0, 235, 210);
 		setLayout(null);
 		
-		btnFinDeJuegoRestart = new JButton("RESTART");
-		btnFinDeJuegoExit = new JButton("EXIT");
-		btnFinDeJuegoRestart.addActionListener((actionEvent) -> { v.restaurar(); });
-
-		btnFinDeJuegoRestart.setFont(new Font(FUENTE, Font.BOLD, 20));
-		btnFinDeJuegoRestart.setBounds(5, 105, 225, 50);
-		btnFinDeJuegoRestart.setBackground(new Color(243, 178, 122));
-		add(btnFinDeJuegoRestart);
+		btnRestart = new JButton("RESTART");
+		btnExit = new JButton("EXIT");
+		lblGameOver = new JLabel("GAME OVER");
 		
-		btnFinDeJuegoExit.addActionListener((actionEvent) -> {	v.cerrarJuego(); System.exit(0); });
+		btnRestart.addActionListener((actionEvent) -> { v.restaurar(); });
+		btnExit.addActionListener((actionEvent) -> {	v.cerrarJuego(); System.exit(0); });
 		
-		btnFinDeJuegoExit.setFont(new Font(FUENTE, Font.BOLD, 20));
-		btnFinDeJuegoExit.setBounds(5, 155, 225, 50);
-		btnFinDeJuegoExit.setBackground(new Color(243, 178, 122));
-		add(btnFinDeJuegoExit);
+		btnRestart.setFont(new Font(FUENTE, Font.BOLD, 20));
+		btnRestart.setBounds(5, 105, 225, 50);
+		btnRestart.setBackground(new Color(243, 178, 122));
+		add(btnRestart);
 		
-		lblNewLabel = new JLabel("GAMEOVER");
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setFont(new Font(FUENTE, Font.BOLD, 35));
-		lblNewLabel.setForeground(new Color(100, 0, 0));
-		lblNewLabel.setBounds(5, 5, 225, 50);
-		add(lblNewLabel);
+		btnExit.setFont(new Font(FUENTE, Font.BOLD, 20));
+		btnExit.setBounds(5, 155, 225, 50);
+		btnExit.setBackground(new Color(243, 178, 122));
+		add(btnExit);
+		
+		lblGameOver.setHorizontalAlignment(SwingConstants.CENTER);
+		lblGameOver.setFont(new Font(FUENTE, Font.BOLD, 35));
+		lblGameOver.setForeground(new Color(100, 0, 0));
+		lblGameOver.setBounds(5, 20, 225, 50);
+		add(lblGameOver);
 	}
 }
