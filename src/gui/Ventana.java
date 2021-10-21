@@ -31,6 +31,7 @@ public class Ventana extends JFrame{
 	private JLabel lblBest;
 	private JLabel lblBestDat;
 	private JLabel lblScore;
+	private PanelFinDeJuego pF;
 	
 	public Ventana(Juego juego) {
 		addWindowListener(new WindowAdapter() {
@@ -42,16 +43,18 @@ public class Ventana extends JFrame{
 		this.miJuego = juego;
 		this.matrizPrincipal = new JLabel[4][4];
 		crearFrame();
-		crearPanelDeJuego();
 		crearPanelStats();
+		crearPanelDeJuego();
 		agregarControles();
+		
+		repaint();
 	}
 	
 	/**
 	 * Setea algunos parametros de la ventana.
 	 */
 	private void crearFrame() {
-		setSize(415, 538);
+		setBounds(0, 0, 415, 538);
 		setResizable(false);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
@@ -166,8 +169,8 @@ public class Ventana extends JFrame{
 	/**
 	 * Da por terminado el juego.
 	 */
-	private void cerrarJuego() {
-		miJuego.salirDelJuego();
+	public void cerrarJuego() {
+		miJuego.guardarRecord();
 	}
 	
 	/**
@@ -176,5 +179,33 @@ public class Ventana extends JFrame{
 	 */
 	public void actualizarBestScore(int best) {
 		lblBestDat.setText(""+best);
+	}
+	
+	/**
+	 * Restaura el juego
+	 */
+	public void restaurar() {
+		getContentPane().remove(pF);
+		repaint();
+		miJuego.restaurar();
+		
+	}
+
+	/**
+	 * Muestra que termino el juego.
+	 */
+	public void termino() {
+		pF = new PanelFinDeJuego(this);
+		
+		int posX = (int) Math.abs(pF.getBounds().getWidth() - getBounds().getWidth()) / 2 - 7;
+		int posY = (int) Math.abs(pF.getBounds().getHeight() - getBounds().getHeight()) / 2 + 19;
+		
+		pF.setLocation(posX, posY);
+		getContentPane().add(pF);
+		
+		setFocusable(true);
+		getContentPane().setComponentZOrder(pF, 0);
+		
+		repaint();
 	}
 }

@@ -19,14 +19,18 @@ public class Juego {
 	private int bestScore;
 	
 	public Juego() {
-		this.miJugador = new Player();
-		this.termino = false;
-		this.puntaje = 0;
+		this.datos = new Datos(this);
+		this.datos.cargarInformacion();
 		this.miVentana = new Ventana(this);
 		this.grillaPrincipal = new Grilla(this);
 		
-		this.datos = new Datos(this);
-		this.datos.cargarInformacion();
+		
+		this.termino = false;
+		this.puntaje = 0;
+		this.bestScore = miJugador.getBestScore();
+		miVentana.actualizarPuntaje(puntaje);
+		miVentana.actualizarBestScore(bestScore);
+		
 	}
 	
 	/**
@@ -59,7 +63,8 @@ public class Juego {
 	 */
 	public void termino() {
 		termino = true;
-		System.out.println("Fin del juego");
+		guardarRecord();
+		miVentana.termino();
 	}
 	
 	/**
@@ -90,7 +95,7 @@ public class Juego {
 	/**
 	 * Guarda el mayor record
 	 */
-	public void salirDelJuego() {
+	public void guardarRecord() {
 		if(miJugador.getBestScore() < puntaje)
 			miJugador.setBestScore(puntaje);
 		datos.guardarInformacion();
@@ -103,5 +108,18 @@ public class Juego {
 	public void addBestScore(int bestScore) {
 		this.bestScore = bestScore;
 		miVentana.actualizarBestScore(this.bestScore);
+	}
+	
+	/**
+	 * Restaura el juego.
+	 */
+	public void restaurar() {
+		datos.cargarInformacion();
+		this.termino = false;
+		this.puntaje = 0;
+		this.bestScore = miJugador.getBestScore();
+		miVentana.actualizarPuntaje(puntaje);
+		miVentana.actualizarBestScore(bestScore);
+		grillaPrincipal.restaurar();
 	}
 }

@@ -24,7 +24,7 @@ public class Datos {
 	/**
 	 * Carga el archivo de configuracion.
 	 */
-	public void cargarConfiguracion() {
+	private void cargarConfiguracion() {
 		try (InputStream input = new FileInputStream("./src/resources/configuration.properties")) {
 
             configuration = new Properties();
@@ -61,7 +61,6 @@ public class Datos {
 			FileInputStream fileInputStream = new FileInputStream(configuration.getProperty("file"));
 			ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
 			miJuego.setJugador((Player) objectInputStream.readObject());
-			miJuego.addBestScore(miJuego.getJugador().getBestScore());
 			objectInputStream.close();
 		}
 		catch (FileNotFoundException e) {

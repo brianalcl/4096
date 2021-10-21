@@ -214,4 +214,19 @@ public class Grilla {
 		
 		return rta;
 	}
+
+	/**
+	 * Restaura la grilla
+	 */
+	public void restaurar() {
+		for(int f = 0; f < matriz.length; f++) {
+			for(int c = 0; c < matriz.length; c++) {
+				matriz[f][c].vaciar();
+			}
+		}
+		cantLlenas = 0;
+		realizoMovimiento = false;
+		crearPieza();
+		crearPieza();
+	}
 }
