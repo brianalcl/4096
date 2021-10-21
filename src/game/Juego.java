@@ -19,6 +19,7 @@ public class Juego {
 	private int bestScore;
 	
 	public Juego() {
+		this.miJugador = new Player();
 		this.datos = new Datos(this);
 		this.datos.cargarInformacion();
 		this.miVentana = new Ventana(this);
