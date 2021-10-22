@@ -15,9 +15,11 @@ import main.Player;
 public class Datos {
 	private Juego miJuego;
 	private Properties configuration;
+	private String rutaProperties;
 	
 	public Datos(Juego juego) {
 		this.miJuego = juego;
+		configuration = new Properties();
 		cargarConfiguracion();
 	}
 	
@@ -25,11 +27,10 @@ public class Datos {
 	 * Carga el archivo de configuracion.
 	 */
 	private void cargarConfiguracion() {
-		
-		
 		try {
-			InputStream input = new FileInputStream("./src/resources/configuration.properties");
-            configuration = new Properties();
+			rutaProperties = "./config/configuration.properties";
+			
+			InputStream input = new FileInputStream(rutaProperties);
             configuration.load(input);
 
         } catch (IOException ex) {
