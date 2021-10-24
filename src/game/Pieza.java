@@ -2,10 +2,13 @@ package game;
 
 import java.util.Random;
 
+import factory.FabricaGUI;
+
 public class Pieza {
 	
 	private boolean estaLibre;
-	private PiezaGrafica miRepresentacion;
+	private RepPieza miRepresentacion;
+	private FabricaGUI miFabricaGUI;
 	private int numero;
 	private Random rnd;
 	private Grilla miGrilla;
@@ -18,10 +21,11 @@ public class Pieza {
 	 * @param columna la columna a la que pertenece.
 	 * @param grilla la grilla a la que pertenece.
 	 */
-	public Pieza(int fila, int columna, Grilla grilla) {
+	public Pieza(int fila, int columna, Grilla grilla, FabricaGUI fabrica) {
 		this.estaLibre = true;
 		this.numero = 0;
-		this.miRepresentacion = new PiezaGrafica();
+		this.miFabricaGUI = fabrica;
+		this.miRepresentacion = this.miFabricaGUI.crearRepPieza();
 		this.miRepresentacion.setImagen(numero);
 		this.rnd = new Random();
 		this.miGrilla = grilla;
@@ -34,7 +38,7 @@ public class Pieza {
 	 * retorna la pieza grafica asociada a esta pieza.
 	 * @return la pieza grafica asociada a esta pieza.
 	 */
-	public PiezaGrafica getPiezaGrafica() {
+	public RepPieza getRepPieza() {
 		return miRepresentacion;
 	}
 	
@@ -109,6 +113,18 @@ public class Pieza {
 	 */
 	public boolean esIgual(Pieza p) {
 		return numero == p.numero;
+	}
+
+	/**
+	 * Actualiza la fabrica
+	 * @param fabrica
+	 */
+	public void setFabrica(FabricaGUI fabrica) {
+		// TODO Auto-generated method stub
+		miFabricaGUI = fabrica;
+		miRepresentacion = miFabricaGUI.crearRepPieza();
+		miRepresentacion.setImagen(numero);
+		miGrilla.cambiarPieza(this);
 	}
 
 }

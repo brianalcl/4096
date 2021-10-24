@@ -1,82 +1,78 @@
-package game;
+package factory;
 
 import java.awt.Color;
 import java.awt.Font;
 
-import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 
-public class PiezaGrafica extends JLabel{
-	/**
-	 * Serial por defecto.
-	 */
-	private static final long serialVersionUID = 1L;
+import game.RepPieza;
+
+public class RepPiezaGris extends RepPieza {
+
+private static final long serialVersionUID = 1L;
 	
 	private static final String FUENTE = "SansSerif";
 	
-	public PiezaGrafica() {
+	public RepPiezaGris () {
 		setFont(new Font(FUENTE, Font.BOLD, 25));
 		setHorizontalAlignment(SwingConstants.CENTER);
-		setBorder(new LineBorder(new Color(185, 173, 160), 2));
+		setBorder(new LineBorder(new Color(240, 240, 240), 2));
 	}
-	
-	/**
-	 * Coloca una imagen a la pieza grafica.
-	 * @param el numero de la imagen
-	 */
+
 	public void setImagen(int numero){
+		
 		String ruta = numero == 0? "" : ""+numero;
 		setText(ruta);
 		
 		switch(numero) {
 		case 0:
 			setForeground(Color.BLACK);
-			setBackground(new Color(205, 193, 180));
+			setBackground(new Color(220, 220, 220));
 			break;
 		case 2:
 			setForeground(Color.BLACK);
-			setBackground(new Color(238, 228, 218));
+			setBackground(new Color(200, 200, 200));
 			break;
 		case 4:
 			setForeground(Color.BLACK);
-			setBackground(new Color(238, 205, 201));
+			setBackground(new Color(180, 180, 180));
 			break;
 		case 8:
 			setForeground(Color.WHITE);
-			setBackground(new Color(243, 178, 122));
+			setBackground(new Color(160, 160, 160));
 			break;
 		case 16:
 			setForeground(Color.WHITE);
-			setBackground(new Color(246, 150, 100));
+			setBackground(new Color(140, 140, 140));
 			break;
 		case 32:
 			setForeground(Color.WHITE);
-			setBackground(new Color(247, 124, 95));
+			setBackground(new Color(120, 120, 120));
 			break;
 		case 64:
 			setForeground(Color.WHITE);
-			setBackground(new Color(247, 95, 59));
+			setBackground(new Color(100, 100, 100));
 			break;
 		case 128:
 			setForeground(Color.WHITE);
-			setBackground(new Color(237, 208, 115));
+			setBackground(new Color(80, 80, 80));
 			break;
 		case 256:
 			setForeground(Color.WHITE);
-			setBackground(new Color(237, 204, 98));
+			setBackground(new Color(60, 60, 60));
 			break;
 		case 512:
 			setForeground(Color.WHITE);
-			setBackground(new Color(237, 201, 80));
+			setBackground(new Color(40, 40, 40));
 			break;
 		case 1024:
 			setForeground(Color.WHITE);
-			setBackground(new Color(237, 197, 63));
+			setBackground(new Color(20, 20, 20));
 			break;
 		case 2048:
 			setForeground(Color.WHITE);
-			setBackground(new Color(237, 190, 50));
+			setBackground(new Color(0, 0, 0));
 			break;
 		default:
 			setForeground(Color.WHITE);

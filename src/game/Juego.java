@@ -1,6 +1,8 @@
 package game;
 
 import data.Datos;
+import factory.FabricaGUI;
+import factory.FabricaGUIClasica;
 import gui.Ventana;
 import main.Player;
 
@@ -18,12 +20,12 @@ public class Juego {
 	private Player miJugador;
 	private int bestScore;
 	
-	public Juego() {
+	public Juego(Ventana v, FabricaGUI fabrica) {
+		this.miVentana = v;
 		this.miJugador = new Player();
 		this.datos = new Datos(this);
 		this.datos.cargarInformacion();
-		this.miVentana = new Ventana(this);
-		this.grillaPrincipal = new Grilla(this);
+		this.grillaPrincipal = new Grilla(this, fabrica);
 		
 		
 		this.termino = false;
@@ -48,7 +50,7 @@ public class Juego {
 	 * @param p la pieza.
 	 */
 	public void cambiarPieza(Pieza p) {
-		miVentana.cambiarPieza(p.getPiezaGrafica(), p.getFila(), p.getColumna());
+		miVentana.cambiarPieza(p.getRepPieza(), p.getFila(), p.getColumna());
 	}
 	
 	/**
@@ -122,5 +124,13 @@ public class Juego {
 		miVentana.actualizarPuntaje(puntaje);
 		miVentana.actualizarBestScore(bestScore);
 		grillaPrincipal.restaurar();
+	}
+
+	/**
+	 * Actualiza la fabrica
+	 * @param fabrica
+	 */
+	public void setFabrica(FabricaGUI fabrica) {
+		grillaPrincipal.setFabrica(fabrica);
 	}
 }

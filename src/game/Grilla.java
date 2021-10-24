@@ -2,31 +2,31 @@ package game;
 
 import java.util.Random;
 
+import factory.FabricaGUIGris;
+import factory.FabricaGUI;
+import factory.FabricaGUIClasica;
+
 
 public class Grilla {
 	private Juego miJuego;
 	private Pieza[][] matriz;
-	private int filas;
-	private int columnas;
 	private int cantLlenas;
 	private Random rndFila;
 	private Random rndColumna;
 	private boolean realizoMovimiento;
 	
 	
-	public Grilla(Juego juego) {
+	public Grilla(Juego juego, FabricaGUI fabrica) {
 		this.rndFila = new Random();
 		this.rndColumna = new Random();
-		this.filas = 4;
-		this.columnas = 4;
 		this.cantLlenas = 0;
 		this.miJuego = juego;
-		this.matriz = new Pieza[filas][columnas];
+		this.matriz = new Pieza[4][4];
 		this.realizoMovimiento = false;
 		
-		for (int f = 0; f < filas; f++) {
-			for (int c = 0; c < columnas; c++) {
-				matriz[f][c] = new Pieza(f, c, this);
+		for (int f = 0; f < 4; f++) {
+			for (int c = 0; c < 4; c++) {
+				matriz[f][c] = new Pieza(f, c, this, fabrica);
 			}
 		}
 		
@@ -228,5 +228,17 @@ public class Grilla {
 		}
 		
 		return rta;
+	}
+	
+	/**
+	 * Actualiza la fabrica
+	 * @param fabrica
+	 */
+	public void setFabrica(FabricaGUI fabrica) {
+		for (int f = 0; f < 4; f++) {
+			for (int c = 0; c < 4; c++) {
+				matriz[f][c].setFabrica(fabrica);
+			}
+		}
 	}
 }

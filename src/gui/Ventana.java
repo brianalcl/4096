@@ -8,6 +8,10 @@ import game.Juego;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 
+import factory.FabricaGUI;
+import factory.FabricaGUIClasica;
+import factory.FabricaGUIGris;
+
 import java.awt.GridLayout;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -15,6 +19,9 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import javax.swing.JComboBox;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Ventana extends JFrame{
 	/**
@@ -32,24 +39,60 @@ public class Ventana extends JFrame{
 	private JLabel lblBestDat;
 	private JLabel lblScore;
 	private JPanel pF;
+	private FabricaGUI fabrica;
+	private JComboBox comboBox;
 	
-	public Ventana(Juego juego) {
+	public Ventana() {
+		this.matrizPrincipal = new JLabel[4][4];
+		
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
 				cerrarJuego();
 			}
 		});
-		this.miJuego = juego;
-		this.matrizPrincipal = new JLabel[4][4];
+		
+		
 		crearFrame();
 		crearPanelStats();
 		crearPanelDeJuego();
+		crearCambioEstetico();
 		agregarControles();
 		
+		this.miJuego = new Juego(this, fabrica);
+		setFocusable(true);
 		repaint();
 	}
 		
+	private void crearCambioEstetico() {
+		FabricaGUI[] fabricas = new FabricaGUI[2];
+		fabricas[0] = new FabricaGUIClasica();
+		fabricas[1] = new FabricaGUIGris();
+		
+		comboBox = new JComboBox(fabricas);
+		comboBox.setBounds(250, 0, 150, 50);
+		panelEstadisticas.add(comboBox);
+		fabrica = (FabricaGUI) comboBox.getSelectedItem();
+		
+		comboBox.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				actualizarFabrica();
+				
+			}
+		});
+	}
+	
+	private void actualizarFabrica() {
+		fabrica = (FabricaGUI) comboBox.getSelectedItem();
+		actualizarVista();
+		comboBox.transferFocus();
+		
+	}
+
+	private void actualizarVista() {
+		miJuego.setFabrica(fabrica);
+	}
+
 	/**
 	 * Cambia la parte visual de un label.
 	 * @param p un label con informacion ya cargada.
@@ -154,7 +197,6 @@ public class Ventana extends JFrame{
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
 		getContentPane().setLayout(null);
-		setVisible(true);
 	}
 	
 	/**

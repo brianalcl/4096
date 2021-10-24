@@ -1,10 +1,10 @@
 package main;
 
-import game.Juego;
+import gui.Ventana;
 
 public class Main {
 	public static void main(String[] args) {
-		@SuppressWarnings("unused")
-		Juego j = new Juego();
+		Ventana v = new Ventana();
+		v.setVisible(true);
 	}
 }
