@@ -1,8 +1,9 @@
 package game;
 
+import java.io.IOException;
+
 import data.Datos;
 import factory.FabricaGUI;
-import factory.FabricaGUIClasica;
 import gui.Ventana;
 import main.Player;
 
@@ -24,9 +25,14 @@ public class Juego {
 		this.miVentana = v;
 		this.miJugador = new Player();
 		this.datos = new Datos(this);
-		this.datos.cargarInformacion();
-		this.grillaPrincipal = new Grilla(this, fabrica);
 		
+		try {
+			this.datos.cargarInformacion();
+		} catch (ClassNotFoundException | IOException e) {
+			e.printStackTrace();
+		}
+		
+		this.grillaPrincipal = new Grilla(this, fabrica);
 		
 		this.termino = false;
 		this.puntaje = 0;
@@ -101,7 +107,11 @@ public class Juego {
 	public void guardarRecord() {
 		if(miJugador.getBestScore() < puntaje)
 			miJugador.setBestScore(puntaje);
-		datos.guardarInformacion();
+		try {
+			datos.guardarInformacion();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	/**
@@ -117,7 +127,12 @@ public class Juego {
 	 * Restaura el juego.
 	 */
 	public void restaurar() {
-		datos.cargarInformacion();
+		try {
+			datos.cargarInformacion();
+		} catch (ClassNotFoundException | IOException e) {
+			e.printStackTrace();
+		}
+		
 		this.termino = false;
 		this.puntaje = 0;
 		this.bestScore = miJugador.getBestScore();

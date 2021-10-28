@@ -1,7 +1,6 @@
 package data;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -25,56 +24,40 @@ public class Datos {
 	
 	/**
 	 * Carga el archivo de configuracion.
+	 * @throws IOException 
 	 */
 	private void cargarConfiguracion() {
 		try {
 			rutaProperties = "./config/configuration.properties";
-			
 			InputStream input = new FileInputStream(rutaProperties);
-            configuration.load(input);
-
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-
+			configuration.load(input);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
     }
 	
 	/**
 	 * Permite guardar la informacion del record mas alto del juego.
+	 * @throws IOException 
 	 */
-	public void guardarInformacion() {
-		try {
-			FileOutputStream fileOutputStream = new FileOutputStream(configuration.getProperty("file"));
-			ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
-			objectOutputStream.writeObject(miJuego.getJugador());
-			objectOutputStream.flush();
-			objectOutputStream.close();
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+	public void guardarInformacion() throws IOException {
+		FileOutputStream fileOutputStream = new FileOutputStream(configuration.getProperty("file"));
+		ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
+		objectOutputStream.writeObject(miJuego.getJugador());
+		objectOutputStream.flush();
+		objectOutputStream.close();
 	}
 	
 	/**
 	 * Permite cargar la informacion del record mas alto en el juego.
+	 * @throws IOException 
+	 * @throws ClassNotFoundException 
 	 */
-	public void cargarInformacion() {
-		try {
-			FileInputStream fileInputStream = new FileInputStream(configuration.getProperty("file"));
-			ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
-			miJuego.setJugador((Player) objectInputStream.readObject());
-			objectInputStream.close();
-		}
-		catch (FileNotFoundException e) {
-			// si no esta es porque el jugador fue creado vacio
-		} 
-		catch (IOException e) {
-			e.printStackTrace();
-		}
-		catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
-		
+	public void cargarInformacion() throws IOException, ClassNotFoundException {
+		FileInputStream fileInputStream = new FileInputStream(configuration.getProperty("file"));
+		ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
+		miJuego.setJugador((Player) objectInputStream.readObject());
+		objectInputStream.close();
+
 	}
 }

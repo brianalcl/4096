@@ -2,9 +2,7 @@ package game;
 
 import java.util.Random;
 
-import factory.FabricaGUIGris;
 import factory.FabricaGUI;
-import factory.FabricaGUIClasica;
 
 
 public class Grilla {
