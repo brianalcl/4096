@@ -11,6 +11,7 @@ import javax.swing.border.LineBorder;
 import factory.FabricaGUI;
 import factory.FabricaGUIClasica;
 import factory.FabricaGUIGris;
+import factory.FabricaGUIImg;
 
 import java.awt.GridLayout;
 import java.awt.event.KeyAdapter;
@@ -65,9 +66,10 @@ public class Ventana extends JFrame{
 	}
 		
 	private void crearCambioEstetico() {
-		FabricaGUI[] fabricas = new FabricaGUI[2];
-		fabricas[0] = new FabricaGUIClasica();
-		fabricas[1] = new FabricaGUIGris();
+		FabricaGUI[] fabricas = new FabricaGUI[3];
+		fabricas[0] = new FabricaGUIImg();
+		fabricas[1] = new FabricaGUIClasica();
+		fabricas[2] = new FabricaGUIGris();
 		
 		comboBox = new JComboBox(fabricas);
 		comboBox.setBounds(250, 0, 150, 50);
@@ -106,6 +108,8 @@ public class Ventana extends JFrame{
 		matrizPrincipal[fila][columna].setBackground(p.getBackground());
 		matrizPrincipal[fila][columna].setHorizontalAlignment(p.getHorizontalAlignment());
 		matrizPrincipal[fila][columna].setBorder(p.getBorder());
+		matrizPrincipal[fila][columna].setIcon(p.getIcon());
+		repaint();
 	}
 
 	/**
@@ -206,7 +210,6 @@ public class Ventana extends JFrame{
 		panelDeJuego = new JPanel();
 		panelDeJuego.setBounds(0, 100, 400, 400);
 		panelDeJuego.setLayout(new GridLayout(4, 4, 0, 0));
-		panelDeJuego.setBorder(new LineBorder(new Color(100, 0, 0), 10));
 		getContentPane().add(panelDeJuego);
 		
 		for (int f = 0; f < matrizPrincipal.length; f++) {
