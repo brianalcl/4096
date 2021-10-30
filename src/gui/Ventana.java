@@ -6,7 +6,6 @@ import javax.swing.JLabel;
 import game.Juego;
 
 import javax.swing.JPanel;
-import javax.swing.border.LineBorder;
 
 import factory.FabricaGUI;
 import factory.FabricaGUIClasica;
@@ -72,6 +71,7 @@ public class Ventana extends JFrame{
 		fabricas[2] = new FabricaGUIGris();
 		
 		comboBox = new JComboBox(fabricas);
+		comboBox.setFocusable(false);
 		comboBox.setBounds(250, 0, 150, 50);
 		panelEstadisticas.add(comboBox);
 		fabrica = (FabricaGUI) comboBox.getSelectedItem();
@@ -87,8 +87,6 @@ public class Ventana extends JFrame{
 	private void actualizarFabrica() {
 		fabrica = (FabricaGUI) comboBox.getSelectedItem();
 		actualizarVista();
-		comboBox.transferFocus();
-		
 	}
 
 	private void actualizarVista() {
